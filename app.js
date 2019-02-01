@@ -2,18 +2,17 @@ var express= require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 mongoose.connect('mongodb://localhost:27017/glitch', {useNewUrlParser: true});
-var Schema = mongoose.Schema;
-
 
 //Schema Setup.
-var glitchSchema = new Schema({
+var glitchSchema = new mongoose.Schema({
 	name: String, 
 	member1: String, 
 	member2: String
 });
 
-var glitch = mongoose.model("glitch", glitchSchema);
+var register = mongoose.model("register", glitchSchema);
 
 
 
@@ -37,27 +36,26 @@ app.get("/register", function(req, res){
 	res.render("register");
 });
 
-app.post("/register", function(req, res){
+app.post("/register",urlencodedParser, function(req, res){
 	//get data from form and add to glitch array.
 	var name = req.body.name;
 	var membr1 = req.body.mname;
 	var membr2 = req.body.m2name;
 	var data = {name: name, member1: membr1, member2: membr2};
 	//Create a new entry and save it to DB
-	glitch.create(data, function(err, newlyCreated){
+	register.create(data, function(err, newlyCreated){
 		if(err){
 			console.log(err);
 		} else{
 			// redirect to campground page
-			console.log(newlyCreated)
 			res.redirect("/"); 
 		}
 	});		 
 });
 
 
-app.get("/grapesJS", function(req, res){
-	res.render("grapes");
+app.get("/quiz", function(req, res){
+	res.render("questions");
 });
 
 
@@ -70,6 +68,6 @@ app.get("/:randomText", function(req, res){
 
 
 //LISTNING PORT INFORMATION
-app.listen(3000, function(){
+ app.listen(3000, "0.0.0.0", function(){
 	console.log("Server is live at port 3000");
-});
+ });

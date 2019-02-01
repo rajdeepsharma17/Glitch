@@ -1,5 +1,5 @@
 body{
-	background-image: url("BG3.jpg");
+	background-image: url();
 	background-size: cover;
 	background-position: center center;
 	position: relative;
@@ -10,6 +10,8 @@ body{
 }
 
 .icon{
+	padding-left: 20%;
+	background-color: black;
 	font-family: 'Monoton', cursive;
 	font-size: 50px;
 	color: rgb(5, 161, 195);
