@@ -18,7 +18,7 @@ var register = mongoose.model("register", glitchSchema);
 
 
 //adding css files to the node server.
-app.use("/cssFiles", express.static(__dirname + '/asset'));
+app.use(express.static('public'));
 
 
 
