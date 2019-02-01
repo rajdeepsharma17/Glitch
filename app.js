@@ -3,7 +3,9 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-mongoose.connect('mongodb://localhost:27017/glitch', {useNewUrlParser: true});
+mongoose.connect("mongodb://raj:raj123@ds153778.mlab.com:53778/glitchquiz", { useNewUrlParser: true });
+
+const port=process.env.PORT || 3000
 
 //Schema Setup.
 var glitchSchema = new mongoose.Schema({
@@ -68,6 +70,6 @@ app.get("/:randomText", function(req, res){
 
 
 //LISTNING PORT INFORMATION
- app.listen(3000, "0.0.0.0", function(){
+ app.listen(port, "0.0.0.0", function(){
 	console.log("Server is live at port 3000");
  });
